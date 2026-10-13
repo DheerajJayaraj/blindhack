@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine
+﻿from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
 from app.core.config import settings
@@ -31,6 +31,7 @@ def get_db():
 
 
 def create_tables():
-    from app.db.models import TaskRecord  # Register the model
+    # Import every model so SQLAlchemy registers its table metadata.
+    from app.db import models  # noqa: F401
 
     Base.metadata.create_all(bind=engine)
